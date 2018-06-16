@@ -21,7 +21,16 @@ public class KnightMovement : MonoBehaviour
         {
             anim.SetTrigger("TurnRight");
         }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            anim.SetTrigger("Attack");
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            anim.SetTrigger("JumpAttack");
+        }
 
+        anim.SetBool("Blocking", Input.GetKey(KeyCode.LeftShift));        
         anim.SetFloat("VelocityX", Input.GetAxis("Horizontal"));
         anim.SetFloat("VelocityZ", Input.GetAxis("Vertical"));
     }
