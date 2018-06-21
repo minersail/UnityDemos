@@ -5,8 +5,9 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float health = 50;
+    [HideInInspector]
+    public bool dead;
 
-    private bool dead;
     private float cooldown;
 
 	// Use this for initialization
