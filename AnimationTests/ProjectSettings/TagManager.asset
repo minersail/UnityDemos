@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Dummy
+  - Knight
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - PostProcessing
   - Player
   - Dummy
-  - 
-  - 
+  - Team 1
+  - Team 2
   - 
   - 
   - 
