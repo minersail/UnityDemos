@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DummyController : MonoBehaviour
 {
-    Transform target;
+    GameObject target;
 
 	// Use this for initialization
 	void Start ()
@@ -15,7 +15,9 @@ public class DummyController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Vector3 direction = target.position - transform.position;
+        if (target == null) return;
+
+        Vector3 direction = target.transform.position - transform.position;
         Vector3 localDirection = transform.InverseTransformDirection(direction);
         Vector3 normalized = localDirection.normalized;
         float distance = localDirection.magnitude;
@@ -51,10 +53,36 @@ public class DummyController : MonoBehaviour
             anim.SetFloat("VelocityX", Mathf.Lerp(anim.GetFloat("VelocityX"), 0, Time.deltaTime));
             anim.SetFloat("VelocityZ", Mathf.Lerp(anim.GetFloat("VelocityX"), 0, Time.deltaTime));
         }
+
+        if (target.GetComponent<Health>().dead)
+        {
+            GetTarget();
+        }
     }
 
     void GetTarget()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        float min = float.MaxValue;
+
+        foreach (GameObject knight in GameObject.FindGameObjectsWithTag("Knight"))
+        {
+            Team otherTeam = knight.GetComponent<Team>();
+            Team thisTeam = GetComponent<Team>();
+            Health health = knight.GetComponent<Health>();
+
+            if (otherTeam.team != thisTeam.team && !health.dead)
+            {
+                if (Vector3.Distance(knight.transform.position, transform.position) < min)
+                {
+                    target = knight;
+                    min = Vector3.Distance(knight.transform.position, transform.position);
+                }
+            }
+        }
+
+        if (min == float.MaxValue)
+        {
+            target = null;
+        }
     }
 }
