@@ -9,7 +9,7 @@ public class DummyController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        GetTarget();	
+        FindTarget();	
 	}
 	
 	// Update is called once per frame
@@ -51,16 +51,16 @@ public class DummyController : MonoBehaviour
             anim.SetTrigger("Attack");
 
             anim.SetFloat("VelocityX", Mathf.Lerp(anim.GetFloat("VelocityX"), 0, Time.deltaTime));
-            anim.SetFloat("VelocityZ", Mathf.Lerp(anim.GetFloat("VelocityX"), 0, Time.deltaTime));
+            anim.SetFloat("VelocityZ", Mathf.Lerp(anim.GetFloat("VelocityZ"), 0, Time.deltaTime));
         }
 
         if (target.GetComponent<Health>().dead)
         {
-            GetTarget();
+            FindTarget();
         }
     }
 
-    void GetTarget()
+    void FindTarget()
     {
         float min = float.MaxValue;
 
@@ -83,6 +83,16 @@ public class DummyController : MonoBehaviour
         if (min == float.MaxValue)
         {
             target = null;
+
+            Animator anim = GetComponent<Animator>();
+
+            anim.SetFloat("VelocityX", 0);
+            anim.SetFloat("VelocityZ", 0);
         }
+    }
+
+    public void SetTarget(GameObject go)
+    {
+        target = go;
     }
 }
