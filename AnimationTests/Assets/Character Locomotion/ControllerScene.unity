@@ -1309,6 +1309,11 @@ Prefab:
       propertyPath: m_Name
       value: Team 1 Knight (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 137920130405384204, guid: ddd748f15169c1d448e25389c14957fc,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ddd748f15169c1d448e25389c14957fc, type: 2}
   m_IsPrefabParent: 0

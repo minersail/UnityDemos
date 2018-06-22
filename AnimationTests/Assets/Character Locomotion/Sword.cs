@@ -22,7 +22,13 @@ public class Sword : MonoBehaviour
             if (other.GetComponentInParent<Animator>() != null)
             {
                 Animator anim = other.GetComponentInParent<Animator>();
-                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Hit") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Dying"))
+                Health health = other.GetComponentInParent<Health>();
+
+                if (health.health < damage) // Fatal
+                {
+                    anim.SetTrigger("Dying");
+                }
+                else
                 {
                     anim.SetTrigger("Hit");
 
