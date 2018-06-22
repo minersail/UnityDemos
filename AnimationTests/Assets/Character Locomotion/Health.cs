@@ -33,7 +33,6 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         { 
-            GetComponent<Animator>().SetTrigger("Dying");
             dead = true;
 
             foreach (CapsuleCollider cc in GetComponentsInChildren<CapsuleCollider>())
