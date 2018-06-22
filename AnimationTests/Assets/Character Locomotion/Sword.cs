@@ -24,13 +24,10 @@ public class Sword : MonoBehaviour
                 Animator anim = other.GetComponentInParent<Animator>();
                 Health health = other.GetComponentInParent<Health>();
 
-                if (health.health < damage) // Fatal
+                if (health.health > damage) // Non-Fatal
                 {
-                    anim.SetTrigger("Dying");
-                }
-                else
-                {
-                    anim.SetTrigger("Hit");
+                    if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) // Don't trigger duplicate hits
+                        anim.SetTrigger("Hit");
 
                     if (other.GetComponentInParent<DummyController>() != null)
                     {

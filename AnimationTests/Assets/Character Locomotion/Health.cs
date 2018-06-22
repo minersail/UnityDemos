@@ -32,7 +32,9 @@ public class Health : MonoBehaviour
         cooldown = 0;
 
         if (health <= 0)
-        { 
+        {
+            GetComponent<Animator>().SetTrigger("Dying");
+            GetComponent<Animator>().ResetTrigger("Hit"); // Make sure can't be hit during death animation
             dead = true;
 
             foreach (CapsuleCollider cc in GetComponentsInChildren<CapsuleCollider>())

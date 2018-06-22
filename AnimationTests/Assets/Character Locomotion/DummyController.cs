@@ -33,12 +33,19 @@ public class DummyController : MonoBehaviour
                 if (cross.y > 0)
                 {
                     anim.SetTrigger("TurnRight");
+                    anim.ResetTrigger("TurnLeft");
                 }
                 else
                 {
                     anim.SetTrigger("TurnLeft");
+                    anim.ResetTrigger("TurnRight");
                 }
             }
+        }
+        else
+        {
+            anim.ResetTrigger("TurnRight");
+            anim.ResetTrigger("TurnLeft");
         }
 
         if (distance > 2)
