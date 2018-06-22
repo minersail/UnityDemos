@@ -159,12 +159,17 @@ ModelImporter:
     13700002: Paladin_J_Nordstrom_Helmet
     13700004: Paladin_J_Nordstrom_Shield
     13700006: Paladin_J_Nordstrom_Sword
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Paladin_MAT
+    second: {fileID: 2100000, guid: d3b1aab9589142e42968a4fc030f9cf4, type: 2}
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 2
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

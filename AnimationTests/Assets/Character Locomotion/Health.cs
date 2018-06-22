@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float health = 50;
+    public float maxHealth = 50;
+
+    [HideInInspector]
+    public float health;
     [HideInInspector]
     public bool dead;
 
@@ -12,7 +15,7 @@ public class Health : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		
+        health = maxHealth;
 	}
 	
 	// Update is called once per frame

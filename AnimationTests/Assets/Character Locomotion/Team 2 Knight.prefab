@@ -856,6 +856,7 @@ GameObject:
   - component: {fileID: 114610510023909150}
   - component: {fileID: 114573946984297330}
   - component: {fileID: 114949895866114216}
+  - component: {fileID: 114109947554741198}
   m_Layer: 12
   m_Name: Team 2 Knight
   m_TagString: Knight
@@ -1197,7 +1198,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1655393861587374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.8400116, y: -0.0000029802322, z: 18.235191}
+  m_LocalPosition: {x: 4.82, y: -0.00000011920929, z: 2.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4383307204600354}
@@ -2224,6 +2225,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114109947554741198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1655393861587374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 204a6ac051c2da44d88e7e0cfec45ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114573946984297330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2257,6 +2269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a248adac2f96a47b2139a86efd1990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 50
   health: 50
   dead: 0
 --- !u!114 &114810106819601526
@@ -2337,7 +2350,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: c6470a930a959344fb41e64c6a17fd0b, type: 3}
+  - {fileID: 2100000, guid: c7338ce09f740a24eb87c5f565e732c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2389,7 +2402,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: c6470a930a959344fb41e64c6a17fd0b, type: 3}
+  - {fileID: 2100000, guid: c7338ce09f740a24eb87c5f565e732c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2488,7 +2501,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: c6470a930a959344fb41e64c6a17fd0b, type: 3}
+  - {fileID: 2100000, guid: c7338ce09f740a24eb87c5f565e732c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2536,7 +2549,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: c6470a930a959344fb41e64c6a17fd0b, type: 3}
+  - {fileID: 2100000, guid: c7338ce09f740a24eb87c5f565e732c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

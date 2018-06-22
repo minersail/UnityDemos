@@ -25,6 +25,12 @@ public class Sword : MonoBehaviour
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Hit") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Dying"))
                 {
                     anim.SetTrigger("Hit");
+
+                    if (other.GetComponentInParent<DummyController>() != null)
+                    {
+                        // Draw aggro
+                        other.GetComponentInParent<DummyController>().SetTarget(transform.root.gameObject);
+                    }
                 }
             }
             
