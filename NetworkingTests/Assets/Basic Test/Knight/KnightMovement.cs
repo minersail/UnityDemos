@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnightMovement : MonoBehaviour
+public class KnightMovement : Photon.MonoBehaviour
 {
     Animator anim;
 
