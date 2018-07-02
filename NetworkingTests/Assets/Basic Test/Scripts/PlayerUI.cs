@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿/*// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="PlayerUI.cs" company="Exit Games GmbH">
 //   Part of: Photon Unity Networking Demos
 // </copyright>
@@ -33,11 +33,11 @@ namespace ExitGames.Demos.DemoAnimator
 		[Tooltip("UI Slider to display Player's Health")]
 		public Slider PlayerHealthSlider;
 
-		#endregion
+        #endregion
 
-		#region Private Properties
+        #region Private Properties
 
-		PlayerManager _target;
+        NetworkComponent _target;
 
 		float _characterControllerHeight = 0f;
 
@@ -112,7 +112,7 @@ namespace ExitGames.Demos.DemoAnimator
 		/// Assigns a Player Target to Follow and represent.
 		/// </summary>
 		/// <param name="target">Target.</param>
-		public void SetTarget(PlayerManager target){
+		public void SetTarget(NetworkComponent target){
 
 			if (target == null) {
 				Debug.LogError("<Color=Red><b>Missing</b></Color> PlayMakerManager target for PlayerUI.SetTarget.",this);
@@ -140,4 +140,4 @@ namespace ExitGames.Demos.DemoAnimator
 		#endregion
 
 	}
-}
+}*/
