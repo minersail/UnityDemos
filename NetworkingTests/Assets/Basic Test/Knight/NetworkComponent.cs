@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NetworkComponent : Photon.PunBehaviour, IPunObservable
 {
+    public static GameObject LocalPlayerInstance;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.isWriting)
