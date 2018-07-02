@@ -19,6 +19,19 @@ public class NetworkComponent : Photon.PunBehaviour, IPunObservable
             GetComponentInChildren<Health>().health = (float)stream.ReceiveNext();
         }
     }
+    public void Awake()
+    {
+        // #Important
+        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
+        if (photonView.isMine)
+        {
+            LocalPlayerInstance = gameObject;
+        }
+
+        // #Critical
+        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+        DontDestroyOnLoad(gameObject);
+    }
 
     // Use this for initialization
     void Start ()
