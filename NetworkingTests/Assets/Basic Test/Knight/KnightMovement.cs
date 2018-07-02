@@ -13,7 +13,12 @@ public class KnightMovement : MonoBehaviour
 	
 	void Update ()
     {
-		if (Input.GetKeyDown(KeyCode.Q))
+        if (photonView.isMine == false && PhotonNetwork.connected == true)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             anim.SetTrigger("TurnLeft");
         }
