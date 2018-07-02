@@ -24,6 +24,8 @@ public class NetworkComponent : Photon.PunBehaviour, IPunObservable
 		if (!photonView.isMine)
         {
             GetComponentInChildren<Camera>().enabled = false;
+            GetComponentInChildren<FlareLayer>().enabled = false;
+            GetComponentInChildren<AudioListener>().enabled = false;
         }
 	}
 	
