@@ -42,6 +42,10 @@ public class NetworkComponent : Photon.PunBehaviour, IPunObservable
             GetComponentInChildren<FlareLayer>().enabled = false;
             GetComponentInChildren<AudioListener>().enabled = false;
         }
+        else
+        {
+            ChangeLayersRecursive(transform, "Player" + photonView.ownerId);
+        }
 	}
 	
 	// Update is called once per frame
@@ -51,5 +55,15 @@ public class NetworkComponent : Photon.PunBehaviour, IPunObservable
         {
             Manager.Instance.LeaveRoom();
         }*/
+    }
+
+    void ChangeLayersRecursive(Transform trans, string name)
+    {
+        trans.gameObject.layer = LayerMask.NameToLayer(name);
+
+        foreach (Transform child in trans)
+        {
+            ChangeLayersRecursive(child, name);
+        }
     }
 }

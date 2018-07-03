@@ -35,12 +35,6 @@ namespace ExitGames.Demos.DemoAnimator
 
 		#endregion
 
-		#region Private Variables
-
-		private GameObject instance;
-
-		#endregion
-
 		#region MonoBehaviour CallBacks
 
 		/// <summary>
