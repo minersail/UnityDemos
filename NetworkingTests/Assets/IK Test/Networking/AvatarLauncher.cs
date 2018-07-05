@@ -34,7 +34,6 @@ public class AvatarLauncher : Photon.PunBehaviour
 
         if (PhotonNetwork.connected)
         {
-            Debug.Log(1);
             PhotonNetwork.JoinRandomRoom();
         }
         else
@@ -47,7 +46,6 @@ public class AvatarLauncher : Photon.PunBehaviour
     {
         if (isConnecting)
         {
-            Debug.Log(2);
             PhotonNetwork.JoinRandomRoom();
         }
     }
