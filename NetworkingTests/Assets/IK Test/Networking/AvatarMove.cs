@@ -15,8 +15,8 @@ public class AvatarMove : Photon.MonoBehaviour
             return;
         }
 
-        Vector3 pos = transform.position;
+        Vector3 pos = transform.Find("Player").transform.position;
         pos += new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * 5, 0, Input.GetAxis("Vertical") * Time.deltaTime * 5);
-        transform.position = pos;
+        transform.Find("Player").transform.position = pos;
 	}
 }
