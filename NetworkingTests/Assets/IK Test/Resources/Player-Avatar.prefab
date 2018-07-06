@@ -3989,9 +3989,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b01afc79e56f04eb1f2599e9f6b261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHandMesh: {fileID: 1094265809070114}
-  rightHandMesh: {fileID: 1547565113944940}
-  avatarBody: {fileID: 1452130462455760}
+  leftHand: {fileID: 1940155213624716}
+  rightHand: {fileID: 1857559639752396}
+  avatarBody: {fileID: 1197881359981536}
   avatarCamera: {fileID: 1597719207785696}
 --- !u!114 &114593452055209726
 MonoBehaviour:

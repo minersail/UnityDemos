@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AvatarNetworking : Photon.PunBehaviour, IPunObservable
 {
-    public GameObject leftHandMesh;
-    public GameObject rightHandMesh;
+    public GameObject leftHand;
+    public GameObject rightHand;
     public GameObject avatarBody;
     public GameObject avatarCamera;
 
@@ -30,12 +30,12 @@ public class AvatarNetworking : Photon.PunBehaviour, IPunObservable
     {
         if (photonView.isMine)
         {
-            avatarBody.GetComponent<MeshRenderer>().enabled = false;
+            avatarBody.SetActive(false);
         }
         else
         {
-            leftHandMesh.GetComponent<MeshRenderer>().enabled = false;
-            rightHandMesh.GetComponent<MeshRenderer>().enabled = false;
+            leftHand.SetActive(false);
+            rightHand.SetActive(false);
             avatarCamera.SetActive(false);
         }
     }
