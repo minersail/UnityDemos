@@ -13,11 +13,17 @@ public class AvatarNetworking : Photon.PunBehaviour, IPunObservable
     {
         if (stream.isWriting)
         {
-            stream.SendNext(transform.GetChild(1).position);
+            stream.SendNext(transform.Find("Player").position);
+            stream.SendNext(avatarCamera.transform.rotation);
+            stream.SendNext(leftHand.transform.position);
+            stream.SendNext(rightHand.transform.position);
         }
         else
         {
-            transform.GetChild(1).position = (Vector3)stream.ReceiveNext();
+            transform.Find("Player").position = (Vector3)stream.ReceiveNext();
+            avatarCamera.transform.rotation = (Quaternion)stream.ReceiveNext();
+            leftHand.transform.position = (Vector3)stream.ReceiveNext();
+            rightHand.transform.position = (Vector3)stream.ReceiveNext();
         }
     }
 

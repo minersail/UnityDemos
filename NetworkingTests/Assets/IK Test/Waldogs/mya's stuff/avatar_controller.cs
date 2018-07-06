@@ -7,7 +7,7 @@ public class avatar_controller : MonoBehaviour {
     public GameObject leftHand;
     public GameObject rightHand;
     public Transform head;
-    public Camera camera;
+    public Camera avatarCamera;
 
     public bool useIK;
     public bool inWater;
@@ -40,7 +40,7 @@ public class avatar_controller : MonoBehaviour {
         Vector3 avatarPos = avatar.transform.position;
         avatarPos.y = 0;
 
-        Vector3 cameraPos = camera.transform.position;
+        Vector3 cameraPos = avatarCamera.transform.position;
         cameraPos.y = 0;
 
         Vector3 distanceVector = cameraPos - avatarPos;
@@ -60,29 +60,29 @@ public class avatar_controller : MonoBehaviour {
         avatar.transform.Translate(directionVector * Time.deltaTime * distanceScale * SPEED, Space.World);
         anim.SetBool("InWater", inWater);
         //Keycode for crouched
-        anim.SetBool("Crouching", camera.transform.position.y < CROUCH_HEIGHT);
+        anim.SetBool("Crouching", avatarCamera.transform.position.y < CROUCH_HEIGHT);
     }
 
     private void LateUpdate()
     {
         Vector3 rotation = avatar.transform.eulerAngles;
-        rotation.y = Mathf.LerpAngle(rotation.y, camera.transform.localEulerAngles.y, Time.deltaTime);
+        rotation.y = Mathf.LerpAngle(rotation.y, avatarCamera.transform.localEulerAngles.y, Time.deltaTime);
         avatar.transform.eulerAngles = rotation;
-        head.rotation = camera.transform.localRotation;
+        head.rotation = avatarCamera.transform.localRotation;
 
     }
 
     private void OnAnimatorIK(int layerIndex)
     {
         anim.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
+        anim.SetIKRotationWeight(AvatarIKGoal.RightHand, ikWeight);
         anim.SetIKPosition(AvatarIKGoal.RightHand, rightHand.transform.position);
         anim.SetIKRotation(AvatarIKGoal.RightHand, rightHand.transform.rotation);
-        anim.SetIKRotationWeight(AvatarIKGoal.RightHand, ikWeight);
 
         anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
+        anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, ikWeight);
         anim.SetIKPosition(AvatarIKGoal.LeftHand, leftHand.transform.position);
         anim.SetIKRotation(AvatarIKGoal.LeftHand, leftHand.transform.rotation);
-        anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, ikWeight);
 
     }
 

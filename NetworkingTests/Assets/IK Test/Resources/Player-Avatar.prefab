@@ -4008,7 +4008,7 @@ MonoBehaviour:
   leftHand: {fileID: 1940155213624716}
   rightHand: {fileID: 1857559639752396}
   head: {fileID: 4191741848907688}
-  camera: {fileID: 20329607485006122}
+  avatarCamera: {fileID: 20329607485006122}
   useIK: 1
   inWater: 0
 --- !u!114 &114903112761813374
