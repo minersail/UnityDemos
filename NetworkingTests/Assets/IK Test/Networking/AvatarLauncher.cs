@@ -62,6 +62,6 @@ public class AvatarLauncher : Photon.PunBehaviour
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 1f, 0f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 1.5f, 0f), Quaternion.identity, 0);
     }
 }

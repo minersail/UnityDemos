@@ -705,7 +705,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 5eea3b09-8c25-4476-9a7a-dfd6065a675d
-  projectName: 
+  projectName: NetworkingTests
   organizationId: minersail
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
