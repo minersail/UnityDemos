@@ -1636,6 +1636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4820785485108736}
   - component: {fileID: 95124179606737184}
+  - component: {fileID: 114085156487602198}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -1833,6 +1834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4710111040238910}
   - component: {fileID: 95908566413406328}
+  - component: {fileID: 114629447021187314}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -3978,6 +3980,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114085156487602198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1857559639752396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37c2cf88f7c59f4c8cf5d3812568143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: -1
+  origin: {fileID: 0}
 --- !u!114 &114366110392464046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4011,6 +4026,19 @@ MonoBehaviour:
   avatarCamera: {fileID: 20329607485006122}
   useIK: 1
   inWater: 0
+--- !u!114 &114629447021187314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1940155213624716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37c2cf88f7c59f4c8cf5d3812568143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: -1
+  origin: {fileID: 0}
 --- !u!114 &114903112761813374
 MonoBehaviour:
   m_ObjectHideFlags: 1
