@@ -4,6 +4,7 @@
 	{
 		_MainTex("Texture", 2D) = "white" {}
 		_TintColor("Tint Color", Color) = (1, 1, 1, 1)
+		_Tiling("Tiling", Range(1, 4)) = 1
 	}
 
 	SubShader 
@@ -23,6 +24,10 @@
 
 			#include "UnityCG.cginc"
 
+			sampler2D _MainTex;
+			fixed4 _TintColor;
+			float _Tiling;
+
 			struct appdata
 			{
 				float4 vertex : POSITION;
@@ -39,12 +44,9 @@
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = v.uv;
+				o.uv = v.uv * _Tiling;
 				return o;
 			}
-
-			sampler2D _MainTex;
-			fixed4 _TintColor;
 
 			float4 frag(v2f i) : SV_Target
 			{
