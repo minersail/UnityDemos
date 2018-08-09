@@ -8,6 +8,9 @@ public class InjuryIK2 : MonoBehaviour
     public Transform rightOrigin;
 
     public Vector3 ikrot;
+    public bool lockX;
+
+    float startX;
 
     Animator anim;
 
@@ -26,9 +29,9 @@ public class InjuryIK2 : MonoBehaviour
 	
 	void Update ()
     {
-        /*time += Time.deltaTime;
+        time += Time.deltaTime;
 
-        float range = 3.0f;
+        /*float range = 3.0f;
         Vector3 direction = anim.GetBool("Left") ? Vector3.left : Vector3.right;
 
         RaycastHit leftHit;
@@ -62,8 +65,8 @@ public class InjuryIK2 : MonoBehaviour
 
         if (Physics.Raycast(leftOrigin.position, Vector3.left, out leftHit, range))
         {
-            leftPoint = leftHit.point;
-            leftIKWeight = 1;// Mathf.Cos(time);
+            leftPoint = leftHit.point + Vector3.right * (Mathf.Max(Mathf.Cos(time * 3), 0) / 5) + Vector3.forward * ((Mathf.Sin(time * 3) + 1) / 4);
+            leftIKWeight = 1;
         }
     }
 

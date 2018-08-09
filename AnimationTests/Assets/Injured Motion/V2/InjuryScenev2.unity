@@ -150,7 +150,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400138, guid: e823e2187a68d0c41bef3e707502872b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.88
+      value: 0.475
       objectReference: {fileID: 0}
     - target: {fileID: 400138, guid: e823e2187a68d0c41bef3e707502872b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftOrigin: {fileID: 1115460765}
   rightOrigin: {fileID: 539146632}
-  ikrot: {x: 0, y: 0, z: 0}
+  ikrot: {x: -45, y: 0, z: -90}
 --- !u!4 &539146632 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400124, guid: e823e2187a68d0c41bef3e707502872b, type: 3}
