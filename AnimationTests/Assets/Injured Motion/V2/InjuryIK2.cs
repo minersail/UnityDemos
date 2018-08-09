@@ -7,66 +7,71 @@ public class InjuryIK2 : MonoBehaviour
     public Transform leftOrigin;
     public Transform rightOrigin;
 
-    public Vector3 ikrot;
-    public bool lockX;
-
-    float startX;
-
     Animator anim;
 
     Vector3 leftPoint;
     Vector3 rightPoint;
-
     float leftIKWeight;
     float rightIKWeight;
 
+    public Vector3 rot;
+
+    bool left;
     float time;
+
+    float animSpeed = 3.0f; // Speed multiplier for hand reaching animation;
 
     void Start ()
     {
         anim = GetComponent<Animator>();
+        left = true;
 	}
 	
 	void Update ()
     {
         time += Time.deltaTime;
 
-        /*float range = 3.0f;
-        Vector3 direction = anim.GetBool("Left") ? Vector3.left : Vector3.right;
-
-        RaycastHit leftHit;
-        RaycastHit rightHit;
-
-        if (Physics.Raycast(leftOrigin.position, direction, out leftHit, range))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (time > 1.0f)
+            left = !left;
+        }
+
+        bool touchWall = false;
+        float ikLerpSpeed = 3.0f;
+
+        if (Mathf.Abs(anim.GetFloat("Velocity")) > 0.2f)
+        {
+            float range = 3.0f;
+            RaycastHit hitData;
+
+            Vector3 castOrigin = left ? leftOrigin.position : rightOrigin.position;
+            Vector3 directionX = left ? Vector3.left : Vector3.right;
+            Vector3 directionZ = Vector3.forward;
+
+            if (Physics.Raycast(castOrigin, directionX, out hitData, range))
             {
-                time = 0;
-                leftPoint = leftHit.point;
+                bool forward = anim.GetFloat("Velocity") > 0;
+
+                if (left)
+                {
+                    leftPoint = hitData.point + GetCircularOffset(directionX, !forward);
+                    leftIKWeight = Mathf.Lerp(leftIKWeight, 1, Time.deltaTime * ikLerpSpeed);
+                    rightIKWeight = Mathf.Lerp(rightIKWeight, 0, Time.deltaTime * ikLerpSpeed);
+                }
+                else
+                {
+                    rightPoint = hitData.point + GetCircularOffset(directionX, !forward);
+                    rightIKWeight = Mathf.Lerp(rightIKWeight, 1, Time.deltaTime * ikLerpSpeed);
+                    leftIKWeight = Mathf.Lerp(leftIKWeight, 0, Time.deltaTime * ikLerpSpeed);
+                }
+                touchWall = true;
             }
-            leftIKWeight = Mathf.Cos(time);
-        }
-        else
-        {
-            leftIKWeight = Mathf.Lerp(leftIKWeight, 0, Time.deltaTime);
         }
 
-        if (Physics.Raycast(rightOrigin.position, direction, out rightHit, range))
+        if (!touchWall)
         {
-            rightPoint = rightHit.point;
-            rightIKWeight = 1;
-        }
-        else
-        {
-            rightIKWeight = 0;
-        }*/
-        float range = 3.0f;
-        RaycastHit leftHit;
-
-        if (Physics.Raycast(leftOrigin.position, Vector3.left, out leftHit, range))
-        {
-            leftPoint = leftHit.point + Vector3.right * (Mathf.Max(Mathf.Cos(time * 3), 0) / 5) + Vector3.forward * ((Mathf.Sin(time * 3) + 1) / 4);
-            leftIKWeight = 1;
+            leftIKWeight = Mathf.Lerp(leftIKWeight, 0, Time.deltaTime * ikLerpSpeed);
+            rightIKWeight = Mathf.Lerp(rightIKWeight, 0, Time.deltaTime * ikLerpSpeed);
         }
     }
 
@@ -75,10 +80,34 @@ public class InjuryIK2 : MonoBehaviour
         anim.SetIKPosition(AvatarIKGoal.LeftHand, leftPoint);
         anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftIKWeight);
 
-        anim.SetIKRotation(AvatarIKGoal.LeftHand, Quaternion.Euler(ikrot));
-        anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
+        anim.SetIKRotation(AvatarIKGoal.LeftHand, Quaternion.Euler(GetHandRotationOffset(true)));
+        anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftIKWeight);
 
-        //anim.SetIKPosition(AvatarIKGoal.RightHand, rightPoint);
-        //anim.SetIKPositionWeight(AvatarIKGoal.RightHand, rightIKWeight);
+        anim.SetIKPosition(AvatarIKGoal.RightHand, rightPoint);
+        anim.SetIKPositionWeight(AvatarIKGoal.RightHand, rightIKWeight);
+
+        anim.SetIKRotation(AvatarIKGoal.RightHand, Quaternion.Euler(GetHandRotationOffset(false)));
+        anim.SetIKRotationWeight(AvatarIKGoal.RightHand, rightIKWeight);
+    }
+
+    private Vector3 GetCircularOffset(Vector3 direction, bool clockwise)
+    {
+        float animRadius = 0.2f;
+
+        if (clockwise)
+            return (-direction * (Mathf.Max(Mathf.Sin(time * animSpeed), 0) * animRadius)) + (Vector3.forward * ((Mathf.Cos(time * animSpeed) + 1) * animRadius));
+        else
+            return (-direction * (Mathf.Max(Mathf.Cos(time * animSpeed), 0) * animRadius)) + (Vector3.forward * ((Mathf.Sin(time * animSpeed) + 1) * animRadius));
+    }
+
+    private Vector3 GetHandRotationOffset(bool leftHand)
+    {
+        float Z = leftHand ? -90 : 90;
+        float Ymod = leftHand ? 1 : -1;
+
+        Vector3 minRot = new Vector3(-45, 0, Z);
+        Vector3 maxRot = new Vector3(-90, 90 * Ymod, Z);
+
+        return minRot + ((maxRot - minRot) * (Mathf.Cos(time * animSpeed) + 1) / 2);
     }
 }

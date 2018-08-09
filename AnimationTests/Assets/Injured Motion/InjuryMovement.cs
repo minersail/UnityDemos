@@ -15,7 +15,7 @@ public class InjuryMovement : MonoBehaviour
     {
         anim.SetFloat("Velocity", Mathf.Lerp(anim.GetFloat("Velocity"), Input.GetAxis("Vertical"), Time.deltaTime * 3));
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            anim.SetBool("Left", !anim.GetBool("Left"));
+        /*if (Input.GetKeyDown(KeyCode.Space))
+            anim.SetBool("Left", !anim.GetBool("Left"));*/
 	}
 }
