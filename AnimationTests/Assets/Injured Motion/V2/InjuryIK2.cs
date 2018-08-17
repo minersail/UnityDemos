@@ -45,8 +45,8 @@ public class InjuryIK2 : MonoBehaviour
             RaycastHit hitData;
 
             Vector3 castOrigin = left ? leftOrigin.position : rightOrigin.position;
-            Vector3 directionX = left ? Vector3.left : Vector3.right;
-            Vector3 directionZ = Vector3.forward;
+            Vector3 directionX = left ? -transform.right : transform.right;
+            Vector3 directionZ = transform.forward;
 
             if (Physics.Raycast(castOrigin, directionX, out hitData, range))
             {
@@ -90,24 +90,29 @@ public class InjuryIK2 : MonoBehaviour
         anim.SetIKRotationWeight(AvatarIKGoal.RightHand, rightIKWeight);
     }
 
+    // Calculate a semicircular arc around a point
     private Vector3 GetCircularOffset(Vector3 direction, bool clockwise)
     {
         float animRadius = 0.2f;
 
         if (clockwise)
-            return (-direction * (Mathf.Max(Mathf.Sin(time * animSpeed), 0) * animRadius)) + (Vector3.forward * ((Mathf.Cos(time * animSpeed) + 1) * animRadius));
+            return (-direction * (Mathf.Max(Mathf.Sin(time * animSpeed), 0) * animRadius)) + (transform.forward * ((Mathf.Cos(time * animSpeed) + 1) * animRadius));
         else
-            return (-direction * (Mathf.Max(Mathf.Cos(time * animSpeed), 0) * animRadius)) + (Vector3.forward * ((Mathf.Sin(time * animSpeed) + 1) * animRadius));
+            return (-direction * (Mathf.Max(Mathf.Cos(time * animSpeed), 0) * animRadius)) + (transform.forward * ((Mathf.Sin(time * animSpeed) + 1) * animRadius));
     }
 
+    // Calculate rotation of hand as function of time
     private Vector3 GetHandRotationOffset(bool leftHand)
     {
-        float Z = leftHand ? -90 : 90;
-        float Ymod = leftHand ? 1 : -1;
+        float Zmod = leftHand ? 180 : 0;
+        
+        Vector3 rot = new Vector3(-90, 90, (transform.eulerAngles.y + Zmod));
 
-        Vector3 minRot = new Vector3(-45, 0, Z);
-        Vector3 maxRot = new Vector3(-90, 90 * Ymod, Z);
+        if (leftHand)
+            rot.z += ((Mathf.Cos(time * animSpeed) + 1) / 2) * 90;
+        else
+            rot.z -= ((Mathf.Cos(time * animSpeed) + 1) / 2) * 90;
 
-        return minRot + ((maxRot - minRot) * (Mathf.Cos(time * animSpeed) + 1) / 2);
+        return rot;
     }
 }
