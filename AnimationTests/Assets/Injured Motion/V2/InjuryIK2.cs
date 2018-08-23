@@ -7,6 +7,9 @@ public class InjuryIK2 : MonoBehaviour
     public Transform leftOrigin;
     public Transform rightOrigin;
 
+    public Transform frontOrigin;
+    public Transform backOrigin;
+
     Animator anim;
 
     Vector3 leftPoint;
@@ -14,18 +17,18 @@ public class InjuryIK2 : MonoBehaviour
     float leftIKWeight;
     float rightIKWeight;
 
-    public Vector3 rot;
-
     bool left;
     float time;
 
     float animSpeed = 3.0f; // Speed multiplier for hand reaching animation;
 
+    Vector3 turnStart;
+
     void Start ()
     {
         anim = GetComponent<Animator>();
         left = true;
-	}
+    }
 	
 	void Update ()
     {
@@ -73,6 +76,26 @@ public class InjuryIK2 : MonoBehaviour
             leftIKWeight = Mathf.Lerp(leftIKWeight, 0, Time.deltaTime * ikLerpSpeed);
             rightIKWeight = Mathf.Lerp(rightIKWeight, 0, Time.deltaTime * ikLerpSpeed);
         }
+
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("TurnRight") && !anim.GetCurrentAnimatorStateInfo(0).IsName("TurnLeft"))
+        {
+            RaycastHit hitData2;
+
+            if (Physics.Raycast(frontOrigin.position, transform.forward, out hitData2, 0.6f))
+            {
+                if (left)
+                    anim.SetTrigger("TurnRight");
+                else
+                    anim.SetTrigger("TurnLeft");
+
+                turnStart = transform.eulerAngles;
+            }
+        }
+        else
+        {
+            anim.ResetTrigger("TurnRight");
+            anim.ResetTrigger("TurnLeft");
+        }
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -114,5 +137,25 @@ public class InjuryIK2 : MonoBehaviour
             rot.z -= ((Mathf.Cos(time * animSpeed) + 1) / 2) * 90;
 
         return rot;
+    }
+
+    private void OnAnimatorMove()
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("TurnRight"))
+        {
+            float rotAdd = anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.97f ? 90 : 90 * anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
+            transform.eulerAngles = new Vector3(0, turnStart.y + rotAdd, 0);
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("TurnLeft"))
+        {
+            float rotAdd = anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.97f ? 90 : 90 * anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
+            transform.eulerAngles = new Vector3(0, turnStart.y - rotAdd, 0);
+        }
+        else
+        {
+            transform.position = anim.rootPosition;
+        }
     }
 }
