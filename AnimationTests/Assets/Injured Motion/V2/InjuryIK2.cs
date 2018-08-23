@@ -44,7 +44,7 @@ public class InjuryIK2 : MonoBehaviour
 
         if (Mathf.Abs(anim.GetFloat("Velocity")) > 0.2f)
         {
-            float range = 3.0f;
+            float range = 0.6f;
             RaycastHit hitData;
 
             Vector3 castOrigin = left ? leftOrigin.position : rightOrigin.position;
@@ -69,6 +69,19 @@ public class InjuryIK2 : MonoBehaviour
                 }
                 touchWall = true;
             }
+            else
+            {
+                Vector3 raycastAngle = left ? Quaternion.AngleAxis(-125, transform.up) * transform.forward : Quaternion.AngleAxis(125, transform.up) * transform.forward;
+
+                if (Physics.Raycast(backOrigin.position, raycastAngle, out hitData, 5.0f))
+                {
+                    if (hitData.normal == transform.forward)
+                    {
+                        anim.SetTrigger(left ? "TurnLeft" : "TurnRight");
+                        turnStart = transform.eulerAngles;
+                    }
+                }
+            }
         }
 
         if (!touchWall)
@@ -83,10 +96,7 @@ public class InjuryIK2 : MonoBehaviour
 
             if (Physics.Raycast(frontOrigin.position, transform.forward, out hitData2, 0.6f))
             {
-                if (left)
-                    anim.SetTrigger("TurnRight");
-                else
-                    anim.SetTrigger("TurnLeft");
+                anim.SetTrigger(left ? "TurnRight" : "TurnLeft");
 
                 turnStart = transform.eulerAngles;
             }
